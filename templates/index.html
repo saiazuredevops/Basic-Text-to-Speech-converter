@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+
+    <title>Text to Speech</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="mt-5 mb-4">Text to Speech</h1>
+      <form method="post" class="mt-5">
+        <div class="form-group">
+          <label for="text">Enter your text:</label>
+          <textarea name="text" id="text" class="form-control" rows="3"></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="language">Select language:</label>
+          <select name="language" id="language" class="form-control">
+            <!-- ... -->
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      {% if translated_text %}
+        <h2 class="mt-5">Translated Text:</h2>
+        <p>{{ translated_text }}</p>
+      {% endif %}
+
+      {% if audio %}
+        <div class="audio-section">
+          <h2 class="mt-5">Audio:</h2>
+          <audio controls>
+            <source src="{{ url_for('static', filename='output.mp3') }}?t={{ time }}" type="audio/mpeg">
+          </audio>
+          <a href="{{ url_for('download') }}" class="btn btn-secondary mt-3 download-button">Download</a>
+        </div>
+      {% endif %}
+
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>
